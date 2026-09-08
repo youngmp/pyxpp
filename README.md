@@ -3,8 +3,11 @@ XPP as a Python module
 
 Compile from source, then import into Python.
 
+X11 should be installed even if we don't use it (it just simplifies the install process).
 
 # Compile/Make/Install
+
+Create the mamba environment using `environment.yaml`.
 
 ## Ubuntu
 
@@ -19,9 +22,9 @@ run
 
 `make`
 
-## MacOS
+Run test_calls.py in xpp_source to check libxppAPI.so gets called correctly. Nothing should happen; if there are no segfaults you are in good shape.
 
-X11 should be installed even if we don't use it (it just simplifies the install process).
+## MacOS (compiles but doesn't work yet)
 
 Just run `make`
 
