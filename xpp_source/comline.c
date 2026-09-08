@@ -268,7 +268,7 @@ int argc;
 { 
  int i,k;
 
- silent = 0;
+ silent = 1;
  got_file=0;
  xorfix=1;
 

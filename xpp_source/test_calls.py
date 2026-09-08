@@ -5,6 +5,8 @@ import numpy as np
 # load xpp api compiled with libX11.so
 xppa = ct.cdll.LoadLibrary('../xpp_source/libxppAPI.so')
 
+
+
 # figure out how to initialize input array in python to pass into c
 arr = (ct.c_char_p*3)()
 home = os.path.expanduser("~")
@@ -13,6 +15,7 @@ arr[1] = (home+'/Dropbox/xpp-py/xpp_source/ode/lecar.ode').encode('utf-8')
 arr[2] = '-silent'.encode('utf-8')
 
 xppa.do_main_py(3,arr)
+"""
 xppa.integrate_once_py.argtypes = np.ctypeslib.ndpointer(dtype=ct.c_float,ndim=1),
 xppa.integrate_once_py.restype = None
 
@@ -44,3 +47,4 @@ print('last point to put into auto',last)
 
     
 xppa.auto_run_py()
+"""

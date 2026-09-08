@@ -6,6 +6,15 @@ Compile from source, then import into Python.
 
 # Compile/Make/Install
 
+libxppAPI.so is the precompiled library. Makefile will overwrite this.
+
+To remake from scratch run:
+```
+make clean
+make
+```
+
+
 ## Ubuntu
 
 Only tried compiling on Ubuntu 20.04.6
@@ -54,7 +63,10 @@ run
 
 X11 should be installed even if we don't use it (it just simplifies the install process).
 
-libxppAPI.so is the precompiled library. Makefile will overwrite this.
+
+
+
+
 
 # Test
 
