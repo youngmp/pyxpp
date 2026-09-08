@@ -1,7 +1,7 @@
 
 #include "numerics.h"
 
-
+#include <strings.h>
 #include "menudrive.h"
 #include <stdlib.h> 
 #include <stdio.h>
@@ -17,6 +17,9 @@
 #include "storage.h"
 #include "delay_handle.h"
 #include "graf_par.h"
+
+#include "adj2.h"
+#include "integrate.h"
 
 extern Window main_win,info_pop;
 extern Display *display;

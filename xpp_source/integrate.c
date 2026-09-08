@@ -45,6 +45,8 @@
 #include "delay_handle.h"
 #include "load_eqn.h"
 
+#include "nullcline.h"
+
 /*    this is the main integrator routine  
       for phase-plane  
       It takes the steps looks at the interrupts, plots and stores the data

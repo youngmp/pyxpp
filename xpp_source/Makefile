@@ -23,8 +23,10 @@ HELP=help/*.html
 #CC= gcc -std=c99 -pedantic -D_XOPEN_SOURCE=600 -Wall
 
 # had to install gcc-9 because its behavior is different towards variable declarations
-CC= gcc-9 -std=c99 -pedantic -D_XOPEN_SOURCE=600 -Wall -fpic
-CC2= gcc-9 -shared -o
+#CC= gcc-9 -std=c99 -pedantic -D_XOPEN_SOURCE=600 -Wall -fpic
+CC= gcc -std=c99 -pedantic -D_XOPEN_SOURCE=600 -Wall -fpic
+
+CC2= gcc -shared -o
 #AUTLIBS=  -lsundials_cvode -lX11 -lm 
 #These are the 32bit compat libraries.
 #AUTLIBS= -lf2c -lsundials_cvode -lX11 -lm 
@@ -44,11 +46,13 @@ CC2= gcc-9 -shared -o
 #CFLAGS=   -g -O -m64 -DNOERRNO -DNON_UNIX_STDIO -DAUTO -DCVODE_YES  -DHAVEDLL -DMYSTR1=$(MAJORVER) -DMYSTR2=$(MINORVER)  -I/usr/include/X11
 
 #CFLAGS= -g -pedantic -O2     -DNOERRNO -DNON_UNIX_STDIO -DAUTO -DCVODE_YES  -DHAVEDLL -DMYSTR1=$(MAJORVER) -DMYSTR2=$(MINORVER)  -I/opt/X11/include
-CFLAGS= -g -pedantic -O2 -o  -DNOERRNO -DNON_UNIX_STDIO -DAUTO -DCVODE_YES  -DHAVEDLL -DMYSTR1=$(MAJORVER) -DMYSTR2=$(MINORVER)  -I/usr/include/X11
+#CFLAGS= -g -pedantic -O2 -o  -DNOERRNO -DNON_UNIX_STDIO -DAUTO -DCVODE_YES  -DHAVEDLL -DMYSTR1=$(MAJORVER) -DMYSTR2=$(MINORVER)  -I/usr/include/X11
+CFLAGS= -g -pedantic -O2 -o  -DNOERRNO -DNON_UNIX_STDIO -DAUTO -DCVODE_YES  -DHAVEDLL -DMYSTR1=$(MAJORVER) -DMYSTR2=$(MINORVER)  -I/opt/X11/include
 #LDFLAGS=  -m64 -L/usr/lib -L/usr/lib64
 #LDFLAGS=  -m32 -L/usr/X11R6/lib 
 #LDFLAGS=  -L/usr/X11/lib
-LDFLAGS=  -L/usr/include/X11
+#LDFLAGS=  -L/usr/include/X11
+LDFLAGS=  -L/opt/X11/lib
 LIBS=  -lX11 -lm -ldl   
 # NOTE: Recent (RedHat 8) versions of GCC seem to no longer have
 # the integer errno, so compile with the -DNOERRNO option as well
@@ -204,7 +208,8 @@ xppaut: $(OBJECTS)
 	 #$(CC) -DAUTO -o xppaut $(OBJECTS) $(AUTOOBJ) $(LDFLAGS) $(LIBS) $(AUTLIBS) ./libf2cm.a
 	 $(CC) -DAUTO -o xppaut $(OBJECTS) $(LDFLAGS) $(LIBS)
 
-	$(CC2) libxppAPI.so $(OBJECTS) /usr/lib/x86_64-linux-gnu/libX11.so
+##$(CC2) libxppAPI.so $(OBJECTS) /usr/lib/x86_64-linux-gnu/libX11.so
+	$(CC2) libxppAPI.so $(OBJECTS) -L/opt/X11/lib -lX11
 tarfile:
 	tar zcvf xppaut$(VERSION).tgz $(SOURCES) $(HEADERS) $(BITMAPS) default.opt \
 	 xpp_doc.tex README Makefile.old Makefile Makefile.64 Makefile.nice  Makefile.lib Makefile.avi Makefile.old Makefile.w7b \

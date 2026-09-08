@@ -1,3 +1,4 @@
+#include "numerics.h"
 #include "nullcline.h"
 #include "my_rhs.h"
 #include "abort.h"

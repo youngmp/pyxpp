@@ -52,6 +52,7 @@ void display_browser(Window w, BROWSER b);
 void redraw_browser(BROWSER b);
 void new_browse_dat(float **new_dat, int dat_len);
 void refresh_browser(int length);
+void data_get_mybrowser(int row);
 void reset_browser(void);
 void draw_data(BROWSER b);
 void init_browser(void);

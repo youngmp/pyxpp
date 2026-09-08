@@ -10,6 +10,9 @@
 #include "auto_c.h"
 #include "graf_par.h"
 
+#include "derived.h"
+#include "my_rhs.h"
+
 #include "load_eqn.h"
 
 #include "read_dir.h"
@@ -50,7 +53,12 @@
 
 #include "xpplim.h"
 #include "autlim.h"
-#include "xAuto.h" 
+#include "xAuto.h"
+
+int go_go_auto(void);
+int go_go_auto_py(void);
+void load_browser_with_branch(int ibr, int pts, int pte);
+void storeautopoint(double x, double y);
 
 #define MAXLINELENGTH 100000
 #define PACK_AUTO 0
@@ -169,6 +177,8 @@ int auto_var=0;
 int is_3_there=0;
 
 int load_all_labeled_orbits=0;
+
+void auto_new_ss_py(void);
 
 
 ROTCHK blrtn;
@@ -2482,7 +2492,7 @@ void auto_start_at_homoclinic()
   if(HomoFlag==2)
     xAuto.iequib=-2;
   flag=get_homo_info(HomoFlag,&xAuto.nunstab,&xAuto.nstab,homo_l,homo_r);
-  if(flag)do_auto(opn,close,Auto.itp);
+  if(flag)do_auto(opn,cls,Auto.itp);
 
   
 }

@@ -1,6 +1,10 @@
 #include "auto_f2c.h"
 #include "auto_c.h"
 #include "xAuto.h"
+
+int cnrlae_py(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, FUNI_TYPE((*funi)), STPNT_TYPE_AE((*stpnt)), PVLI_TYPE_AE((*pvli)), doublereal *thl, doublereal *thu, integer *iuz, doublereal *vuz);
+int stplae_py(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, doublereal *rlcur, doublereal *u);
+
 extern XAUTO xAuto;
 extern int NODE;
 extern int RestartLabel;
@@ -3080,7 +3084,7 @@ headng(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, integer iuni
 } /* headng_ */
 
 
-stplae_py(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, doublereal *rlcur, doublereal *u)
+int stplae_py(iap_type *iap, rap_type *rap, doublereal *par, integer *icp, doublereal *rlcur, doublereal *u)
 {
 
     /* Local variables */
