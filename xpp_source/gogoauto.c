@@ -3,6 +3,12 @@
 #include "auto_c.h"
 #include "xAuto.h"
 
+int autoae_py(iap_type *iap, rap_type *rap, doublereal *par,
+	   integer *icp,
+	   FUNI_TYPE((*funi)),
+	   STPNT_TYPE_AE((*stpnt)),
+	   PVLI_TYPE_AE((*pvli)),
+	   doublereal *thl, doublereal *thu, integer *iuz, doublereal *vuz);
 
 
 extern XAUTO xAuto;
@@ -578,7 +584,7 @@ int set_function_pointers(const iap_type iap,function_list *data) {
   return 0;
 }
 
-dump_params(iap_type iap, rap_type rap,int *icp, double *thl)
+int dump_params(iap_type iap, rap_type rap,int *icp, double *thl)
 {
   int i;
   printf("%d %d %d %d  \n", iap.ndim,iap.ips,iap.irs,iap.ilp);

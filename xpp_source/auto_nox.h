@@ -6,6 +6,8 @@
 #include "autlim.h"
 #define MAX_AUT_PER 10
 
+void storeautopoint(double x, double y);
+
 typedef struct {
   int irot;
   int nrot[1000];

@@ -1,7 +1,6 @@
 #ifndef _nullcline_h_
 #define _nullcline_h_
 
-
 #include <stdio.h>
 
 typedef struct {
@@ -15,6 +14,9 @@ typedef struct nclines {
                 struct nclines *n,*p;
 }  NCLINES;
 
+void set_colorization_stuff(void);
+void silent_nullclines(void);
+void silent_dfields(void);
 
 void create_new_cline();
 void froz_cline_stuff_com(int i);

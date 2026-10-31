@@ -1,3 +1,4 @@
+#include "browse.h"
 #include "diagram.h"
 #include "autevd.h"
 #include "init_conds.h"

@@ -382,10 +382,13 @@ int argc;
 
   logfile=stdout;
 
-  // checks directory? 
+  // checks directory?
+  printf("get_directory");
   get_directory(myfile);
-  
+
+  printf("do_comline");
   do_comline(argc, argv);
+  
 
   load_eqn();
 
