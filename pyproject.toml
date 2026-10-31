@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyxpp"
+version = "0.1.0"
+description = "XPPAUT as a Python module: simulations, every GUI button, and AUTO bifurcation diagrams, without X11"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "GPL-2.0-or-later" }
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+pandas = ["pandas"]
+test = ["pytest", "matplotlib"]
+
+[tool.setuptools]
+packages = ["pyxpp"]
+
+[tool.setuptools.package-data]
+pyxpp = ["_libxpp.so", "_libxpp.dylib"]
