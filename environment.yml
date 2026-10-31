@@ -1,27 +1,26 @@
+# Conda environment for pyxpp development and the example notebooks.
+#
+#   mamba env create -f environment.yml     (or: conda env create -f environment.yml)
+#   conda activate pyxpp
+#   python -m pytest tests                  # optional check
+#   jupyter lab examples/notebooks
+#
+# The last pip line builds pyxpp/_libxpp.so from the vendored XPPAUT sources
+# with the conda C compiler below.  No X11 packages are needed.
 name: pyxpp
 channels:
   - conda-forge
 dependencies:
-  - ca-certificates
-  - certifi
-  - cython
-  - dill
-  - extensisq
-  - importlib_resources
-  - jupyter
-  - jupyterlab
-  - line_profiler
+  - python>=3.9
+  - c-compiler          # gcc on Linux, clang on macOS
+  - pip
+  - setuptools>=64
+  - wheel
+  - numpy
   - matplotlib
-  - numba
-  - numexpr
-  - openssl
-  - pathos
-  - pdoc
-  - pyfftw
-  - python=3.10
-  - reikna
-  - scipy
-  - sympy
-  - tqdm
-
-prefix: "/Users/youngmp/.local/share/mamba/envs/nbody"
+  - pandas
+  - jupyterlab
+  - ipykernel
+  - pytest
+  - pip:
+      - -e .
