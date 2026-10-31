@@ -178,3 +178,26 @@ def test_every_button_is_callable_without_crashing():
         if "DONE" not in r.stdout:
             crashed.append((".".join(p), r.returncode, r.stderr[-300:]))
     assert not crashed, crashed
+
+
+@pytest.mark.parametrize("script", sorted((HERE.parent / "examples" / "scripts").glob("*.py")),
+                         ids=lambda p: p.name)
+def test_example_scripts_run(script, tmp_path):
+    """Each AUTO example script runs and writes its figure."""
+    import subprocess
+    import sys
+    import os
+    # find pyxpp even when it is not installed (tests run from a checkout)
+    env = {**os.environ, "PYTHONPATH": os.pathsep.join(
+        [str(HERE.parent), os.environ.get("PYTHONPATH", "")])}
+    r = subprocess.run([sys.executable, str(script)], cwd=tmp_path, capture_output=True,
+                       text=True, timeout=600, env=env)
+    assert r.returncode == 0, r.stderr[-2000:]
+    assert list(tmp_path.glob("*.png"))
+
+
+def test_numpy_scalar_answers(lecar):
+    lecar.set(total=np.float64(12.5))
+    assert lecar.numerics["total"] == 12.5
+    lecar.buttons.numerics.dt(np.float32(0.25))
+    assert lecar.numerics["dt"] == 0.25

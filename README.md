@@ -1,6 +1,5 @@
 # pyxpp
 
-
 XPPAUT [10.1137/1.9780898718195] as a Python module. No X11: the GUI is gone, every
 button is a Python call, and AUTO runs from Python.
 
@@ -28,7 +27,7 @@ m.auto.diagram.to_pandas()
 
 ```
 pip install .            # builds the C library; needs only a C compiler
-python -m pytest tests   # 15 tests, ~30 s
+python -m pytest tests
 ```
 
 No X11 headers or libraries are needed at build or run time (the few Xlib
@@ -96,6 +95,23 @@ never asked for raise an `AnswersNotUsed` warning.
 - `MAXSTOR` cannot be changed after loading.
 - A segfault in XPP's C code still takes down the Python process (the full
   button sweep in the tests runs without one).
+
+## Examples
+
+`examples/notebooks` (JupyterLab) and `examples/scripts` (plain Python):
+
+| notebook | script | shows |
+|---|---|---|
+| 01_run_sim | | loading, parameters, integration, sweeps, data |
+| 02_buttons | | every GUI button, answers, transcript |
+| 03_phase_plane | | nullclines, equilibria, trajectories |
+| 04_run_auto | `../lecar_demo.py` | Morris-Lecar: equilibria, Hopf, periodic orbits, two-parameter fold |
+| 05_auto_normal_forms | `auto_normal_forms.py` | pitchfork with branch switching, super/subcritical Hopf vs. exact formulas |
+| 06_auto_two_parameter | `auto_two_parameter.py` | fold curve of the cusp, Hopf curve of the Brusselator, both directions |
+| 07_auto_period_doubling | `auto_period_doubling.py` | Roessler: AUTO started from a simulated orbit, period-doubling cascade |
+| 08_auto_maps | `auto_maps.py` | logistic map: fixed points, 2-cycle via f∘f, over the orbit diagram |
+
+Notebooks 05-08 are generated from the scripts by `_make_auto_notebooks.py`.
 
 ## License
 

@@ -77,6 +77,7 @@ class Point:
     umin: dict          # min over the orbit
     ubar: dict          # orbit average
     eigenvalues: np.ndarray = field(repr=False)
+    stable_override: object = field(default=None, repr=False)
 
     @property
     def type(self):
@@ -84,6 +85,10 @@ class Point:
 
     @property
     def stable(self):
+        # AUTO marks stability by a negative point number, except on the
+        # first point of a run, which it leaves unmarked
+        if self.stable_override is not None:
+            return self.stable_override
         return self.pt < 0
 
     @property
@@ -199,8 +204,9 @@ class Diagram:
                     yy = p.par[p.icp2] if two_par else (p.umax[y] if p.periodic else p.u0[y])
                     ax.annotate(p.type, (p.x, yy), fontsize=7,
                                 xytext=(3, 3), textcoords="offset points")
-        ax.set_xlabel(self.points[0].icp1 if self.points else "")
-        ax.set_ylabel((self.points[0].icp2 if self.points else "") if two_par else y)
+        shown = [p for p in self.points if p.two_par == two_par]
+        ax.set_xlabel(shown[0].icp1 if shown else "")
+        ax.set_ylabel((shown[0].icp2 if shown else "") if two_par else y)
         return ax
 
 
@@ -263,6 +269,10 @@ class Auto:
                 eigenvalues=ev))
         if ctypes.c_int.in_dll(self._c, "NBifs").value <= 1:
             pts = []  # only XPP's empty placeholder node
+        for i, p in enumerate(pts[:-1]):
+            q = pts[i + 1]
+            if abs(p.pt) == 1 and q.branch == p.branch and abs(q.pt) == 2:
+                p.stable_override = q.pt < 0
         return Diagram(pts, vars_)
 
     # -- dialogs ----------------------------------------------------------
@@ -362,7 +372,9 @@ class Auto:
         if not self.settings["grabbed"]:
             if start is None:
                 raise ValueError("nothing grabbed: give start='steady' (or periodic, ...)")
-            reply.append(start)
+            # discrete maps go straight to a steady-state run (no menu)
+            if ctypes.c_int.in_dll(self._c, "METHOD").value != 0:
+                reply.append(start)
             if self._count() > 0:
                 reply.append(True)  # "Destroy AUTO diagram & files?"
         elif choice is not None:

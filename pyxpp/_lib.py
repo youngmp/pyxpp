@@ -7,6 +7,7 @@ globals, so a private copy is what lets several models live in one Python
 process without trampling each other.
 """
 import contextlib
+import numbers
 import ctypes
 import ctypes.util
 import os
@@ -145,8 +146,11 @@ def format_answer(a):
     """Turn a Python value into the text XPP would have been typed."""
     if isinstance(a, bool):
         return "y" if a else "n"
-    if isinstance(a, float):
-        return repr(a)
+    # numbers.* covers numpy scalars; repr(np.float64) would be "np.float64(...)"
+    if isinstance(a, numbers.Integral):
+        return str(int(a))
+    if isinstance(a, numbers.Real):
+        return repr(float(a))
     if isinstance(a, dict):
         return ";".join(f"{k}={format_answer(v)}" for k, v in a.items())
     if isinstance(a, (list, tuple)):
